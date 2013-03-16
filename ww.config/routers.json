@@ -1,0 +1,7 @@
+{
+    "data":{
+        "home":{"controller":"index","action":"index"},
+        "test":{"controller":"index","action":"test"}
+        
+    }
+}
