@@ -13,8 +13,16 @@ class AccountModel extends BaseModel{
     private $email;
     private $datejoin;
     private $status;
+    private $role;
     
+    public function getRole() {
+        return $this->role;
+    }
 
+    public function setRole($role) {
+        $this->role = $role;
+    }
+    
     public function __construct() {
         
         $this->tableName = parent::PREFIX_TABLE.'_'.$this->tableName;

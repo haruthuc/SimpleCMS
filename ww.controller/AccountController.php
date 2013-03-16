@@ -16,10 +16,8 @@ class AccountController extends BaseController{
         $accountModel->setEmail("haruthuc@gmail.com");
         $accountModel->setDatejoin(date("Y-m-d h:i:s"));      
         $accountModel->setStatus("ENABLE");
+        $accountModel->setRole(SecurityManager::ROLE_USER);
         $accountModel->save();
-       
-        
-        
     }
     
     public function testAction($var,$var3){

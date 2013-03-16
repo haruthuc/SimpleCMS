@@ -33,29 +33,32 @@ class RouterManager {
      * 
      */
     public function checkRouting() {
-        // echo var_dump($_SERVER);
-        // echo var_dump($_SERVER["REQUEST_URI"]);
-
-       
+        $controller = "index";
+        $action = "index";
         if (isset($_SERVER["PATH_INFO"])) {
             $pathInfo = $_SERVER["PATH_INFO"];
-
+            $pathInfo = substr($pathInfo,1);
+            //echo $pathInfo; 
             $pathArray = explode("/", $pathInfo);
-            // var_dump($pathArray);
+           // echo count($pathArray);die();
+           //  var_dump($pathArray);
             if (count($pathArray) > 1) {
 
-                $controller = $pathArray[1];
+                 //var_dump($pathArray); 
+             
+                $controller = $pathArray[0];
+                
 
                 $controller = strtoupper(substr($controller, 0, 1)) . substr($controller, 1);
+                
+                
+             
+                $action = $pathArray[1];
+               
+                if($action=="") $action="index";
+               
 
-
-                $action = $pathArray[2];
-                if ($action == null) {
-
-                    $action = "index";
-                }
-
-                $pathParam = array_slice($pathArray, 3);
+                $pathParam = array_slice($pathArray, 2);
 
                 $arrBuff = null;
                 $keyBuff = null;
@@ -71,49 +74,58 @@ class RouterManager {
                         $keyBuff = $pathValue;
                     }
                 }
-
-            
             }
-        }else{
-              
-                $controller = "index";
-                $action = "index";
             
+         
             
+        } else {
+
+            $controller = "index";
+            $action = "index";
+        }
+
+
+       $fileController = __SITE_PATH . "/ww.controller/" . $controller . "Controller.php";
+            
+       if (($controller == "Admin"&&$action =="index")|| SecurityManager::checkSecurityRole() == SecurityManager::ROLE_ADMIN) {
+                
+                
+                $fileController = __SITE_PATH . "/ww.controller/admin/" . $controller . "Controller.php";
+        }
+
+
+        $classController = $controller . "Controller";
+        //echo "Routing ".$classController;
+       // var_dump($fileController);
+        
+        if (file_exists($fileController)) {
+            //include fileController
+            include_once ($fileController);
+            
+            try {
+                $reflectionMethod = new ReflectionMethod($classController, strtolower($action) . 'Action');
+
+                $paramArray = $reflectionMethod->getParameters();
+                $re_argument = array();
+
+                foreach ($paramArray as $k => $param) {
+
+                    ///$re_argument['']
+                    $re_argument[$k] = $arrBuff[$param->name];
+                }
+
+                $reflectionMethod->invokeArgs(new $classController($this->register), $re_argument);
+                
+            } catch (ReflectionException $ex) {
+
+                echo $ex->getMessage();
+            }
+        } else {
+
+             echo "Can not be found controller ".$fileController;   
+            //throw new Exception("Can not be found $fileController");
         }
         
-        
-            $fileController = __SITE_PATH . "/ww.controller/" . $controller . "Controller.php";
-                $classController = $controller . "Controller";
-                if (file_exists($fileController)) {
-                    try
-                    {
-                    $reflectionMethod = new ReflectionMethod($classController, strtolower($action) . 'Action');
-                   
-                    $paramArray = $reflectionMethod->getParameters();
-                    $re_argument = array();
-
-                    foreach ($paramArray as $k => $param) {
-
-                        ///$re_argument['']
-                        $re_argument[$k] = $arrBuff[$param->name];
-                    }
-
-                    $reflectionMethod->invokeArgs(new $classController($this->register), $re_argument);
-                    
-                    }catch(ReflectionException $ex){
-                        
-                        echo $ex->getMessage();
-                        
-                    }
-                    
-                    
-                } else {
-                    
-
-                    throw new Exception("Can not be found $fileController");
-                    
-                }
         
     }
 

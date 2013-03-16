@@ -28,6 +28,8 @@ class TemplateManager {
 
             $pathTemplateFile = __SITE_PATH . '/' . 'ww.template/' . __TEMPLATE_DEFAULT . '/' . $file . '.php';
         }
+        
+        
 
         if (!file_exists($pathTemplateFile)) {
 
