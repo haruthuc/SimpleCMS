@@ -12,6 +12,13 @@ class AdminController extends BaseController{
         
     }
     
+    public function loginAction(){
+        
+        $accountModel = new AccountModel();
+        $resultLogin  = $accountModel->login();
+        print_r($resultLogin);
+        
+    }
     
 }
 

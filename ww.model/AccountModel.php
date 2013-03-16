@@ -82,7 +82,7 @@ class AccountModel extends BaseModel{
         $stm->execute(array($this->id));
     }
 
-    public function find($fields = null,$and=null, $where = null, $order = null,$limit = null,$asoc = TRUE) {
+    public function find($fields = null, $where = null,$and=null, $order = null,$limit = null,$asoc = TRUE) {
         
         $query = "SELECT ";
         if($fields!=null && is_array($fields)){
@@ -96,14 +96,14 @@ class AccountModel extends BaseModel{
         $query .=" FROM ".$this->tableName;
         
         if($where!=null&& is_array($where)){
-            $query.=" WHERE ".$where['key']."=".$where['value'];            
+            $query.=" WHERE '".$where['key']."' =".$where['value'];            
         }
         
         if($and!=null&&  is_array($and)){
             
             foreach ($and as $andValue){
                 
-                $query.=" AND ".$andValue['key'].'='.$andValue['value'];
+                $query.=" AND '".$andValue['key']."' =".$andValue['value'];
             }
             
             
@@ -117,10 +117,10 @@ class AccountModel extends BaseModel{
             $query.=" LIMIT ".$limit['from'].' '.$limit['lenght'];
         }
         try {
-            
+               echo $query;
             $stm = self::$dbo->prepare($query);
             if($asoc==TRUE) return $stm->fetchAll(PDO::FETCH_ASSOC);
-            else $stm->fetchAll();
+            else return $stm->fetchAll();
             
         }  catch (Exception $ex){
             
@@ -137,6 +137,7 @@ class AccountModel extends BaseModel{
 
               $query = "INSERT INTO ".$this->tableName."(username,password,email,datejoin,status) VALUE(?,?,?,?,?)";
               //print_r($query);
+           
              $stm = self::$dbo->prepare($query);
              $resulft = $stm->execute(array($this->username,$this->password,$this->email,$this->getDatejoin(),$this->status));
             
@@ -152,6 +153,20 @@ class AccountModel extends BaseModel{
 
     public function update() {
         
+        
+    }
+    
+    public function login(){
+        
+        $where = array();
+        $where['key'] = "username";
+        $where['value'] = "admin";
+        
+        $and  =  array();
+        $and[0]["key"] = "password";
+        $and[0]["value"]= "admin";
+        
+       return $this->find(null,$where,$and,null,null);
         
     }
 }

@@ -87,7 +87,7 @@ class RouterManager {
 
        $fileController = __SITE_PATH . "/ww.controller/" . $controller . "Controller.php";
             
-       if (($controller == "Admin"&&$action =="index")|| SecurityManager::checkSecurityRole() == SecurityManager::ROLE_ADMIN) {
+       if (($controller == "Admin"&&$action =="index")|| SecurityManager::checkSecurityRole() == SecurityManager::ROLE_ADMIN||($controller == "Admin"&&$action =="login")) {
                 
                 
                 $fileController = __SITE_PATH . "/ww.controller/admin/" . $controller . "Controller.php";
