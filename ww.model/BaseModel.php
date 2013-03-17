@@ -13,11 +13,8 @@ abstract class BaseModel{
     function __construct() {
         if(self::$dbo==null){
                  // $databaseManager = new DatabaseManager();
-                  
                  DatabaseManager::setDatabaseConnection(new PDOMySQLManager());
                  self::$dbo = DatabaseManager::getDatabaseConnection();
-            
-            
         }
    
         

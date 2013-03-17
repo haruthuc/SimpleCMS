@@ -14,9 +14,22 @@ class AdminController extends BaseController{
     
     public function loginAction(){
         
-        $accountModel = new AccountModel();
-        $resultLogin  = $accountModel->login();
-        print_r($resultLogin);
+        //var_dump($_POST);
+        if(isset($_POST['username'])&&isset($_POST['password'])){
+            
+             $username = mysql_escape_string($_POST['username']);
+             $password = mysql_escape_string($_POST['password']);
+             
+             $accountModel = new AccountModel();
+             $accountModel->setUsername($username);
+             $accountModel->setPassword($password);
+             $resultLogin  = $accountModel->login();
+             if(count($resultLogin)>0) SecurityManager::setPermissionRole($resultLogin[0]['role']);
+             echo SecurityManager::checkSecurityRole();
+            
+        }
+       
+     
         
     }
     

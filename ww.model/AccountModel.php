@@ -86,9 +86,12 @@ class AccountModel extends BaseModel{
         
         $query = "SELECT ";
         if($fields!=null && is_array($fields)){
-            foreach ($fields as $field){
-                $query .= $field.',';
-            }
+            
+     
+            
+            $query.= implode(",", $fields)." ";
+            //echo $query;
+            
         }else{
             
             $query .= "*";
@@ -96,14 +99,15 @@ class AccountModel extends BaseModel{
         $query .=" FROM ".$this->tableName;
         
         if($where!=null&& is_array($where)){
-            $query.=" WHERE '".$where['key']."' =".$where['value'];            
+            if(is_string($where['value'])) $where['value'] = "'".$where['value']."'";
+            $query.=" WHERE ".$where['key']." =".$where['value'];            
         }
         
         if($and!=null&&  is_array($and)){
             
             foreach ($and as $andValue){
-                
-                $query.=" AND '".$andValue['key']."' =".$andValue['value'];
+                 if(is_string($andValue['value'])) $andValue['value'] = "'".$andValue['value']."'";
+                $query.=" AND ".$andValue['key']." =".$andValue['value'];
             }
             
             
@@ -117,8 +121,10 @@ class AccountModel extends BaseModel{
             $query.=" LIMIT ".$limit['from'].' '.$limit['lenght'];
         }
         try {
-               echo $query;
+            //echo $query;
             $stm = self::$dbo->prepare($query);
+            $stm->execute();
+            
             if($asoc==TRUE) return $stm->fetchAll(PDO::FETCH_ASSOC);
             else return $stm->fetchAll();
             
@@ -135,8 +141,7 @@ class AccountModel extends BaseModel{
         try{
              //print_r($this->tableName);
 
-              $query = "INSERT INTO ".$this->tableName."(username,password,email,datejoin,status) VALUE(?,?,?,?,?)";
-              //print_r($query);
+             $query = "INSERT INTO ".$this->tableName."(username,password,email,datejoin,status) VALUE(?,?,?,?,?)";
            
              $stm = self::$dbo->prepare($query);
              $resulft = $stm->execute(array($this->username,$this->password,$this->email,$this->getDatejoin(),$this->status));
@@ -157,16 +162,16 @@ class AccountModel extends BaseModel{
     }
     
     public function login(){
-        
+        $fields = array("username","role");
         $where = array();
         $where['key'] = "username";
-        $where['value'] = "admin";
+        $where['value'] = $this->username;
         
         $and  =  array();
         $and[0]["key"] = "password";
-        $and[0]["value"]= "admin";
+        $and[0]["value"]= $this->password;
         
-       return $this->find(null,$where,$and,null,null);
+        return $this->find($fields,$where,$and,null,null);
         
     }
 }

@@ -21,19 +21,19 @@
 
 
                 <div class="span6 well well-large loginbox">
-                    <form class="form-horizontal" method="post" action="login">
+                    <form class="form-horizontal" method="POST" action="login">
                         <legend> <strong> Admin </strong> Login Page</legend>
                         <div class="control-group">
                             <label class="control-label" for="txtUsername">Username </label>
                             <div class="controls">
-                                <input type="text" id="txtUsername" placeholder="Username">
+                                <input type="text" id="txtUsername" placeholder="Username" name="username">
                             </div>
 
                         </div>
                         <div class="control-group">
                             <label class="control-label" for="txtPassword">Password </label>
                             <div class="controls">
-                                <input type="password" id="txtPassword"  placeholder="Password">
+                                <input type="password" id="txtPassword"  placeholder="Password" name="password">
                             </div>
 
                         </div>
