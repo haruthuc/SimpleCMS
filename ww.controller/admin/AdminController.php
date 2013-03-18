@@ -25,12 +25,21 @@ class AdminController extends BaseController{
              $accountModel->setPassword($password);
              $resultLogin  = $accountModel->login();
              if(count($resultLogin)>0) SecurityManager::setPermissionRole($resultLogin[0]['role']);
-             echo SecurityManager::checkSecurityRole();
+             $this->manageAccountAction();
+            
             
         }
-       
-     
         
+    }
+    
+    
+    public function manageAccountAction(){
+        
+            $accountModel = new AccountModel();
+            $results =  $accountModel->find();
+            //var_dump($results);die();
+            $this->register->template->results = $results;
+            $this->register->template->render("account");
     }
     
 }

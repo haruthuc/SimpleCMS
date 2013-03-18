@@ -46,6 +46,14 @@ class TemplateManager {
             include_once $pathTemplateFile;
         }
     }
+    
+    public function renderJSON(){
+        
+        echo json_encode($this->vars);
+        
+        
+    }
+    
 
 }
 

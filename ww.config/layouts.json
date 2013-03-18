@@ -1,0 +1,19 @@
+{
+    "data": {
+            "onepage":{
+                "file":"onepage.php",
+                "description":"One page column layout",
+                "position":["header","content","body"]
+            },
+            "two-column-left":{
+                "file":"twocolumnlelf.php",
+                "description":"Layout two column with small column left",
+                "position":["header","content-left","content-right","footer"]},
+            "two-column-right":{
+                "file":"twocolumnright.php",
+                "description":":Layout two column with small column right",
+                "position":["header","content-left","content-right","footer"]
+        }
+            
+    }
+}
