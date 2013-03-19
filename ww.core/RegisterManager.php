@@ -8,6 +8,8 @@ class RegisterManager{
     
         private $vars = array();
         
+        //private static $messages = array();
+        
         
         //get value form array
         public function __get($index){
@@ -21,7 +23,9 @@ class RegisterManager{
             
             
         }
-    
+        
+       
+        
     
     
     

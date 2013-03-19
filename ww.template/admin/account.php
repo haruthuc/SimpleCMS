@@ -2,9 +2,27 @@
 <body>
 	<?php include_once 'menu.php';?>
  
-
+    <script>
+        $(document).ready(function(){
+            
+            // $("#myModal").modal();
+            
+        });
+        
+       
+    
+    </script>
 
  	<div class="container well well-large">
+            
+        <div class="row">
+    
+         <?php MessageHelper::renderMessages();?>
+                
+    
+            
+        </div>    
+            
     	<div class="row">
         	
         
@@ -72,7 +90,7 @@
             
             	<div class="row">
                 	<div class="span9"> 
-                    	<div class="page-header"> <h4> <i class="icon-user"></i> Danh sách Người dùng <button class="btn" type="button"><i class="icon-plus"></i> Tạo mới Người dùng</button></h4></div>
+                    	<div class="page-header"> <h4> <i class="icon-user"></i> Danh sách Người dùng <a href="#myAccountModal" class="btn" role="button" data-toggle="modal" ><i class="icon-plus"></i> Tạo mới Người dùng</a></h4></div>
                     
                     </div>
                 </div>
@@ -146,23 +164,7 @@
                             
                             
                             
-                         <div class="row">
-                         		<div class="span9">
-                                	<div class="pagination pagination-right">
-           							 <ul>
-                                        <li><a href="#">&laquo;</a></li>
-                                        <li><a href="#">1</a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">4</a></li>
-                                        <li><a href="#">5</a></li>
-                                        <li><a href="#">&raquo;</a></li>
-                                     </ul>
-          					  </div>
-                                
-                                </div>
-                         	
-                         </div> 
+                  
                           
                             
                     
@@ -177,7 +179,57 @@
         </div>
         
         
-    
+                <!-- Modal -->
+        <div id="myAccountModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <form name="user" action="createAccount" method="post">    
+            
+        <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Tạo tài khoản người dùng</h3>
+        </div>
+        
+            
+        <div class="modal-body">
+            
+          
+                           
+                                    <div class="controls">
+                                		<label class="span2">Tên đăng nhập</label>
+                                		<input class="span4" type="text" placeholder="Tên đăng nhập" name="username"/>
+        							</div>
+                                    <div class="controls">
+                                    	<label class="span2">Mật khẩu</label>
+                                		<input class="span4" type="password" placeholder="Mật khẩu" name="password"/>
+                                    </div>
+                                  
+                                    <div class="controls">
+                                    	<label class="span2">Email</label>
+                                    	<input class="span4" type="text" placeholder="Email" name="email" />
+                                    </div>
+
+                                     <div class="controls">
+                                    	<label class="span2">Phân quyền</label>
+                                    	<select class="span2" name="permission">
+                                        	<option>Người dùng</option>
+                                        	<option>Người đăng bài</option>
+                                            <option>Quản trị</option>
+                                        </select>
+                                    
+                                    </div>
+                                
+                                    
+            
+            
+            
+        </div>
+        <div class="modal-footer">
+        <button  type="reset" class="btn" data-dismiss="modal" aria-hidden="true">Đóng</button>
+        <button type="submit" class="btn btn-primary">Tạo tài khoản</button>
+        </div>
+        </div>    
+         </form>
+
+                    <!-- Modal -->
     
     </div>  
  

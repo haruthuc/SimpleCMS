@@ -141,10 +141,10 @@ class AccountModel extends BaseModel{
         try{
              //print_r($this->tableName);
 
-             $query = "INSERT INTO ".$this->tableName."(username,password,email,datejoin,status) VALUE(?,?,?,?,?)";
+             $query = "INSERT INTO ".$this->tableName."(username,password,email,datejoin,status,role) VALUE(?,?,?,?,?,?)";
            
              $stm = self::$dbo->prepare($query);
-             $resulft = $stm->execute(array($this->username,$this->password,$this->email,$this->getDatejoin(),$this->status));
+             $resulft = $stm->execute(array($this->username,$this->password,$this->email,$this->getDatejoin(),$this->status,$this->role));
             
              //var_dump($resulft);
              if($returnID==TRUE) return $stm->lastInsertId(); 

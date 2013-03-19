@@ -7,26 +7,29 @@
 class SecurityManager{
     const ROLE_ADMIN = "ADMIN";
     const ROLE_USER = "USER";
-    private static $PERMISSION_ROLE;
-
+    //private static $PERMISSION_ROLE;
+    public function __construct() {
+      
+    }
 
 
 
     public static function checkSecurityRole(){
-        
-        if(self::$PERMISSION_ROLE==null){
+        if($_SESSION['role']==null){
             
             return SecurityManager::ROLE_USER;
         }else{
             
-            return self::$PERMISSION_ROLE;
+            return $_SESSION['role'];
+            
         }
         
     }
     
     public static function setPermissionRole($role){
         
-        self::$PERMISSION_ROLE = $role;
+        $_SESSION['role'] = $role;
+        
     }
     
     
