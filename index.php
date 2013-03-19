@@ -10,7 +10,7 @@ define("__ROUTER_FILE_CONFIG", FALSE);
 define("__TEMPLATE_DEFAULT", "default");
 define("__TEMPLATE_ADMIN", "admin");
 define("__SESSION_ENGINE","DATABASE");
-define("__SESSION_TIMEOUT",12000);
+define("__SESSION_TIMEOUT",0);
 
 include_once __SITE_PATH . '/ww.init/Bootstrap.php';
 
