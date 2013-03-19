@@ -54,6 +54,15 @@ function __autoload($class_name) {
     include_once ($file);
 }
 
+//check config session engine
+if(__SESSION_ENGINE=="DATABASE"){
+    $sessionManager = new DBSessionManager ();
+} elseif(__SESSION_ENGINE=="FILE") {
+    $sessionManager = new FileSessionManager();
+}
+//start session
+session_start();
+
 //create register manager
 $registerManager = new RegisterManager();
 
