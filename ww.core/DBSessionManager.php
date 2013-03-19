@@ -22,7 +22,7 @@ class DBSessionManager extends ISessionManager {
     public function open($savePath, $sessionName) {
         
         global $sess_save_path;
-        $sess_save_path = $save_path;
+        $sess_save_path = $savePath;
         return true;
         
     }
@@ -30,9 +30,10 @@ class DBSessionManager extends ISessionManager {
     public function read($id) {
         
         $newid = mysql_real_escape_string($id);
+        //var_dump($id);
         $time = time();
         $fields = array("session_data");
-        $where = array();
+        
         $where['key'] = "session_id";
         $where['value'] = $newid;
         
@@ -40,8 +41,8 @@ class DBSessionManager extends ISessionManager {
         $and[0]["key"] = "expires";
         $and[0]["value"]= $time;
         $and[0]['math'] = " >";
-        
-        return $this->find($fields,$where,$and,null,null);
+        $modelSession = new SessionModel();
+        return $modelSession->find($fields,$where,$and,null,null);
         
         
     }
@@ -51,6 +52,7 @@ class DBSessionManager extends ISessionManager {
          $time = time() + $this->life_time;
          $newid = mysql_real_escape_string($id);
          $newdata = mysql_real_escape_string($data);
+         //var_dump($newdata);
          $sessionModel = new SessionModel();
          $sessionModel->setSession_id($newid);
          $sessionModel->setSession_data($newdata);

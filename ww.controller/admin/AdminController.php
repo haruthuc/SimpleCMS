@@ -19,11 +19,10 @@ class AdminController extends BaseController{
             
              $username = mysql_escape_string($_POST['username']);
              $password = mysql_escape_string($_POST['password']);
-             
              $accountModel = new AccountModel();
              $accountModel->setUsername($username);
              $accountModel->setPassword($password);
-             $resultLogin  = $accountModel->login();
+             $resultLogin = $accountModel->login();
              if(count($resultLogin)>0) SecurityManager::setPermissionRole($resultLogin[0]['role']);
              $this->manageAccountAction(); 
         }
@@ -61,7 +60,6 @@ class AdminController extends BaseController{
             $accountModel->setRole(SecurityManager::ROLE_USER);
             $accountModel->setDatejoin(date("Y-m-d h:i:s"));      
             $accountModel->setStatus("ENABLE");
-            $accountModel->setRole(SecurityManager::ROLE_USER);
             $accountModel->save();
             
             

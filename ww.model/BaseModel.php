@@ -20,7 +20,7 @@ abstract class BaseModel{
         
     }
     
-    abstract function find($fields=null,$and=null, $where = null, $order = null,$limit = null,$asoc = TRUE);
+    abstract function find($fields=null, $where = null, $and=null,$order = null,$limit = null,$asoc = TRUE);
     
     abstract function save($returnLastID = FALSE);
     

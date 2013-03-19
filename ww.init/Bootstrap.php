@@ -22,11 +22,7 @@ function __autoload($class_name) {
     }
 
     if (strstr($class_name, "Controller") != FALSE) {
-
-       
             $file = __SITE_PATH . '/ww.controller/' . $class_name;
-            
-        
     }
 
     if (strstr($class_name, "Model") != FALSE) {

@@ -1,7 +1,4 @@
 <?php
-
-session_start ();
-
 /** error report * */
 error_reporting(E_ALL);
 define('__SITE_PATH', realpath(dirname(__FILE__)));

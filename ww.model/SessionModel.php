@@ -58,7 +58,7 @@ class SessionModel extends BaseModel{
         
     }
 
-    public function find($fields = null, $and = null, $where = null, $order = null, $limit = null, $asoc = TRUE) {
+    public function find($fields = null, $where = null, $and = null, $order = null, $limit = null, $asoc = TRUE) {
         
            $query = "SELECT ";
         if($fields!=null && is_array($fields)){
@@ -119,8 +119,8 @@ class SessionModel extends BaseModel{
 
              $query = "REPLACE ".$this->tableName."(session_id,session_data,expires) VALUE(?,?,?)";
              $stm = self::$dbo->prepare($query);
-             $resulft = $stm->execute(array($this->session_data,$this->session_data,$this->expires));
-             if($returnID==TRUE) return $stm->lastInsertId(); 
+             $resulft = $stm->execute(array($this->session_id,$this->session_data,$this->expires));
+             if($returnLastID==TRUE) return $stm->lastInsertId(); 
             
         }catch(PDOException $ex){
             
