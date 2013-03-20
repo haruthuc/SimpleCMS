@@ -19,6 +19,7 @@ class TemplateManager {
     }
 
     public function render($file) {
+        
         $pathTemplateFile = null;
 
         if (SecurityManager::checkSecurityRole() == SecurityManager::ROLE_ADMIN) {
@@ -33,7 +34,7 @@ class TemplateManager {
 
         if (!file_exists($pathTemplateFile)) {
 
-            throw new Exception("Can not be found template");
+            throw new Exception("Can not be found template $pathTemplateFile");
         } else {
             
              // Load variables

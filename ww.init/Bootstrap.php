@@ -22,7 +22,8 @@ function __autoload($class_name) {
     }
 
     if (strstr($class_name, "Controller") != FALSE) {
-            $file = __SITE_PATH . '/ww.controller/' . $class_name;
+            //$file = __SITE_PATH . '/ww.controller/' . $class_name;
+        if($class_name="BaseController") $file = __SITE_PATH . '/ww.controller/' . $class_name;
     }
 
     if (strstr($class_name, "Model") != FALSE) {
@@ -62,13 +63,24 @@ session_start();
 //create register manager
 $registerManager = new RegisterManager();
 
-//set router to register
-$registerManager->router = new RouterManager($registerManager);
+$requestManager = new RequestManager($registerManager);
+
+//set asset mananger
+$assetManager = new AssetManager($registerManager);
+
+$registerManager->assets = $assetManager;
 
 
 //set template to register 
 $registerManager->template = new TemplateManager($registerManager);
 
+$registerManager->request = $requestManager;
 
-$registerManager->router->checkRouting();
+
+//set router to register
+$router = new RouterManager($registerManager,$requestManager);
+$router->checkRouting();
+
+
+
 ?>

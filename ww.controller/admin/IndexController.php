@@ -4,17 +4,31 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-class AdminController extends BaseController{
+class IndexController extends BaseController{
+    
+    public function __construct($register) {
+        
+
+        parent::__construct($register);
+       $this->register->assets->appendFile("css/bootstrap.min.css");
+       $this->register->assets->appendFile("css/admin.css");
+       $this->register->assets->appendFile("js/jquery.js") ;
+       $this->register->assets->appendFile("js/bootstrap.min.js");
+    }
     
     public function indexAction(){
+        //echo "Test";
+         //$this->manageAccountAction();
         
-        $this->manageAccountAction();
         
+
+       $this->register->template->render("login");
     }
     
     public function loginAction(){
         
-        //var_dump($_POST);
+        
+        
         if(isset($_POST['username'])&&isset($_POST['password'])){
             
              $username = mysql_escape_string($_POST['username']);
@@ -23,7 +37,9 @@ class AdminController extends BaseController{
              $accountModel->setUsername($username);
              $accountModel->setPassword($password);
              $resultLogin = $accountModel->login();
+            
              if(count($resultLogin)>0) SecurityManager::setPermissionRole($resultLogin[0]['role']);
+            
              $this->manageAccountAction(); 
         }
         
@@ -36,9 +52,10 @@ class AdminController extends BaseController{
     public function manageAccountAction(){
         
             $accountModel = new AccountModel();
-            //$results =  $accountModel->find();
-            print_r(MessageHelper::renderMessages()); die();
+            $results =  $accountModel->find();
+            //print_r(MessageHelper::renderMessages()); die();
             //var_dump($results);die();
+            
             $this->register->template->results = $results;
          
             $this->register->template->render("account");
@@ -64,8 +81,8 @@ class AdminController extends BaseController{
             
             
             $this->manageAccountAction();
-            $messages = array(array("key"=>  MessageHelper::SUCCESS,"content"=>"Create Account successful."));
-            MessageHelper::setMessages($messages);
+           /// $messages = array(array("key"=>  MessageHelper::SUCCESS,"content"=>"Create Account successful."));
+           // MessageHelper::setMessages($messages);
         }
  
         

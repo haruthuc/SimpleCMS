@@ -10,7 +10,7 @@
      public function indexAction(){
          
          
-         echo "Index Controller "." Index Action"; 
+         echo "Index Home Controller "." Index Action"; 
          
          
      }

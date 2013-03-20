@@ -2,13 +2,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-        <link href="<?php AssetHelper::getAssetFile("css/bootstrap.min.css") ?>" rel="stylesheet" />
-        <link href="<?php AssetHelper::getAssetFile("css/admin.css") ?>" rel="stylesheet" />
-        <script src="<?php AssetHelper::getAssetFile("js/jquery.js") ?>"></script>
-        <script src="<?php AssetHelper::getAssetFile("js/bootstrap.min.js") ?>"></script>
-
-
+        <?php $this->register->assets->render(); ?>  
         <title>Admin CP</title>
     </head>
 
@@ -21,7 +15,7 @@
 
 
                 <div class="span6 well well-large loginbox">
-                    <form class="form-horizontal" method="POST" action="login">
+                    <form class="form-horizontal" method="POST" action="../admin/index/login">
                         <legend> <strong> Admin </strong> Login Page</legend>
                         <div class="control-group">
                             <label class="control-label" for="txtUsername">Username </label>
