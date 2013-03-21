@@ -55,10 +55,20 @@ class SessionModel extends BaseModel{
     }
     
     public function delete() {
-        
+        $query = "DELETE FROM ".$this->tableName." WHERE id = ".$this->session_id;
+        $stm = self::$dbo->prepare($query);
+        return $stm->execute();
     }
-
-    public function find($fields = null, $where = null, $and = null, $order = null, $limit = null, $asoc = TRUE) {
+    
+    public function clean($time)
+    {
+        $query = "DELETE FROM ".$this->tableName." WHERE expires < ".$time;
+        $stm = self::$dbo->prepare($query);
+        //$stm->execute();
+        return $stm->execute();
+        
+    }        
+    public function find($fields = null, $where = null, $and = null, $order = null, $limit = null, $asoc = false) {
         
            $query = "SELECT ";
         if($fields!=null && is_array($fields)){

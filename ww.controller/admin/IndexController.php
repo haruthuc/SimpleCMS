@@ -38,6 +38,7 @@ class IndexController extends BaseController{
              $accountModel->setPassword($password);
              $resultLogin = $accountModel->login();
             
+             //var_dump($resultLogin);
              if(count($resultLogin)>0) SecurityManager::setPermissionRole($resultLogin[0]['role']);
             
              $this->manageAccountAction(); 

@@ -22,11 +22,12 @@ class TemplateManager {
         
         $pathTemplateFile = null;
 
-        if (SecurityManager::checkSecurityRole() == SecurityManager::ROLE_ADMIN) {
+        if (SecurityManager::checkSecurityRole() == SecurityManager::ROLE_ADMIN&&$file!='login') {
 
             $pathTemplateFile = __SITE_PATH . '/' . 'ww.template/' . __TEMPLATE_ADMIN . '/' . $file . '.php';
-        } elseif (SecurityManager::checkSecurityRole() == SecurityManager::ROLE_USER) {
-
+       
+            } else {
+            
             $pathTemplateFile = __SITE_PATH . '/' . 'ww.template/' . __TEMPLATE_DEFAULT . '/' . $file . '.php';
         }
         

@@ -13,16 +13,25 @@ class DBSessionManager extends ISessionManager {
 
     public function destroy($id) {
         
+        $newid = mysql_real_escape_string($id);
+        $modelSession = new SessionModel();
+        $modelSession->setSession_id($newid);
+        return $modelSession->delete();
     }
 
     public function gc($maxlifetime) {
-        
+         $old = time() - $maxlifetime;
+         $old = mysql_real_escape_string($old);
+         $modelSession = new SessionModel();
+         return $modelSession->clean($old);
+         
+         
     }
 
     public function open($savePath, $sessionName) {
         
-        global $sess_save_path;
-        $sess_save_path = $savePath;
+        //global $sess_save_path;
+        //$sess_save_path = $savePath;
         return true;
         
     }
@@ -42,8 +51,10 @@ class DBSessionManager extends ISessionManager {
         $and[0]["value"]= $time;
         $and[0]['math'] = " >";
         $modelSession = new SessionModel();
-        return $modelSession->find($fields,$where,$and,null,null);
+        $result = $modelSession->find($fields,$where,$and,null,null,true);
         
+        // print_r();
+        return $result[0]['session_data'];
         
     }
 

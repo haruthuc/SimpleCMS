@@ -57,8 +57,7 @@ if(__SESSION_ENGINE=="DATABASE"){
 } elseif(__SESSION_ENGINE=="FILE") {
     $sessionManager = new FileSessionManager();
 }
-//start session
-session_start();
+
 
 //create register manager
 $registerManager = new RegisterManager();

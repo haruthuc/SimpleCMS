@@ -33,7 +33,13 @@ abstract class ISessionManager{
     abstract function gc($maxlifetime);
     
     
-    
+    function __destruct ()
+    // ensure session data is written out before classes are destroyed
+    // (see https://bugs.php.net/bug.php?id=33772 for details)
+    {
+        @session_write_close();
+
+    } // __destruct
 }
 
 ?>
