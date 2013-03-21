@@ -69,16 +69,17 @@ $assetManager = new AssetManager($registerManager);
 
 $registerManager->assets = $assetManager;
 
+$templateManager = new TemplateManager($registerManager);
 
 //set template to register 
-$registerManager->template = new TemplateManager($registerManager);
+$registerManager->template = $templateManager;
 
 $registerManager->request = $requestManager;
 
 
 //set router to register
-$router = new RouterManager($registerManager,$requestManager);
-$router->checkRouting();
+$routerManager = new RouterManager($registerManager,$requestManager);
+$routerManager->checkRouting();
 
 
 

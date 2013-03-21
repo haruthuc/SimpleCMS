@@ -20,14 +20,14 @@
                         <div class="control-group">
                             <label class="control-label" for="txtUsername">Username </label>
                             <div class="controls">
-                                <input type="text" id="txtUsername" placeholder="Username" name="username">
+                                <input type="text" id="txtUsername" placeholder="Username" name="username" autocomplete="off">
                             </div>
 
                         </div>
                         <div class="control-group">
                             <label class="control-label" for="txtPassword">Password </label>
                             <div class="controls">
-                                <input type="password" id="txtPassword"  placeholder="Password" name="password">
+                                <input type="password" id="txtPassword"  placeholder="Password" name="password" autocomplete="off">
                             </div>
 
                         </div>

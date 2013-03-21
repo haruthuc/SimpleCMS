@@ -181,7 +181,7 @@
         
                 <!-- Modal -->
         <div id="myAccountModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <form name="user" action="createAccount" method="post">    
+        <form name="user" action="../account/create" method="post">    
             
         <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -195,16 +195,16 @@
                            
                                     <div class="controls">
                                 		<label class="span2">Tên đăng nhập</label>
-                                		<input class="span4" type="text" placeholder="Tên đăng nhập" name="username"/>
+                                		<input class="span4" type="text" placeholder="Tên đăng nhập" name="username" autocomplete="off"/>
         							</div>
                                     <div class="controls">
                                     	<label class="span2">Mật khẩu</label>
-                                		<input class="span4" type="password" placeholder="Mật khẩu" name="password"/>
+                                		<input class="span4" type="password" placeholder="Mật khẩu" name="password" autocomplete="off"/>
                                     </div>
                                   
                                     <div class="controls">
                                     	<label class="span2">Email</label>
-                                    	<input class="span4" type="text" placeholder="Email" name="email" />
+                                    	<input class="span4" type="text" placeholder="Email" name="email" autocomplete="off"/>
                                     </div>
 
                                      <div class="controls">

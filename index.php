@@ -1,5 +1,7 @@
 <?php
 //start session
+//echo "<pre>";
+//print_r ($_SERVER);
 $sid = session_id();
 if($sid) {
     echo "Session exists!";
@@ -19,6 +21,7 @@ define("__SESSION_ENGINE","DATABASE");
 define("__SESSION_TIMEOUT",0);
 define("__SECRET_KEY","ad@!@#12");
 
+   
 include_once __SITE_PATH . '/ww.init/Bootstrap.php';
 
 ?>

@@ -9,11 +9,11 @@
 class RouterManager {
 
     private static $_routerConfigMap = null;
-    private $request;
+    private static $request;
     private $register;
     function __construct(RegisterManager $register,  RequestManager $request) {
         
-         $this->request = $request;
+         self::$request = $request;
          $this->register = $register;
 
        // $this->register = $register;
@@ -40,10 +40,10 @@ class RouterManager {
           $pathController = "/ww.controller/";       
           if(self::$_routerConfigMap==null){
                 
-                $controller = $this->request->getController();
+                $controller = self::$request->getController();
                 
-                $action = $this->request->getAction();
-                $isAdmin = $this->request->checkIsAdmin();
+                $action = self::$request->getAction();
+                $isAdmin = self::$request->checkIsAdmin();
                 if($isAdmin){
                     
                     $pathController .= "admin/";                   
@@ -76,6 +76,30 @@ class RouterManager {
                             $classController -> $action();
                    
           }
+          
+          
+      }
+      
+      public static function redirect($controller,$action){
+                   
+          
+          
+                 ob_start();
+            	 $hostURL   =  $_SERVER['HTTP_HOST'];
+                 $path  = $_SERVER['SCRIPT_NAME'];
+                 $pathController = "/ww.controller/";     
+                 if(is_null($controller)) $controller = "index";
+                 if(is_null($action)) $action = "index";
+                 
+                 
+                 if(self::$request->checkIsAdmin()) $path .="/".__ADMIN_PATH;
+                 
+                 $fileController = 'http://'.$hostURL.$path.'/'.$controller."/".$action;
+                 
+            	 Header( "HTTP/1.1 301 Moved Permanently" );
+		 Header( "Location: ".$fileController );
+                 ob_flush();
+        
           
           
       }
