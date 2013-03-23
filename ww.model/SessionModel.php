@@ -143,5 +143,12 @@ class SessionModel extends BaseModel{
     public function update() {
         
     }
+
+    public function getName() {
+ 
+        return get_class ($this);
+    
+        
+    }
 }
 ?>

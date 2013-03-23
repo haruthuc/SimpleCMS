@@ -6,6 +6,7 @@
  */
 class AccountModel extends BaseModel{
     
+   
     private $tableName = "account";
     private $id;
     private $username;
@@ -138,6 +139,9 @@ class AccountModel extends BaseModel{
 
     public function save($returnID = FALSE) {
         
+      
+        //$eventManager->fireEvent($this,"before-add");
+        
         try{
              //print_r($this->tableName);
 
@@ -173,6 +177,10 @@ class AccountModel extends BaseModel{
         
         return $this->find($fields,$where,$and,null,null);
         
+    }
+
+    public function getName() {
+         return get_class ($this);
     }
 }
 

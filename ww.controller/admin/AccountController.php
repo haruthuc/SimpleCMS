@@ -33,7 +33,9 @@ class AccountController extends BaseController{
     }
     
     public function createAction(){
-         
+        //echo "<pre>";
+        //var_dump($this->register->events);
+        
         if(isset($_POST["username"])){
             
             $username =  $_POST['username'];
@@ -46,6 +48,9 @@ class AccountController extends BaseController{
             $accountModel->setRole(SecurityManager::ROLE_USER);
             $accountModel->setDatejoin(date("Y-m-d h:i:s"));      
             $accountModel->setStatus("ENABLE");
+            
+            $this->register->events->fireEvent($accountModel,"before-add");
+            
             $result = $accountModel->save();
             
             RouterManager::redirect("account", "manage");

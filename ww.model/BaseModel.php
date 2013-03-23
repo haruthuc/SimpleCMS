@@ -8,7 +8,7 @@ abstract class BaseModel{
     
     protected static $dbo = null;
     const PREFIX_TABLE = "cms2";
-
+    private $tableName;
 
     function __construct() {
         if(self::$dbo==null){
@@ -28,6 +28,7 @@ abstract class BaseModel{
     
     abstract function delete();
     
+    abstract public function getName();
     
 }
 

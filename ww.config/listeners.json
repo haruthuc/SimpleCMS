@@ -1,0 +1,12 @@
+{
+    "data": {
+        "AccountModel":{
+            "events":{
+                "before-add":["AccountEvent::beforeAdd"]
+            }
+        }
+        
+        
+        
+    }
+}

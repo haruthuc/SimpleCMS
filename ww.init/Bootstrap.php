@@ -20,6 +20,13 @@ function __autoload($class_name) {
 
         $file = __SITE_PATH . '/ww.core/' . $class_name;
     }
+    
+    if (strstr($class_name, "Event") != FALSE) {
+        
+         $file = __SITE_PATH . '/ww.events/' . $class_name;
+        
+        
+    }
 
     if (strstr($class_name, "Controller") != FALSE) {
             //$file = __SITE_PATH . '/ww.controller/' . $class_name;
@@ -58,9 +65,13 @@ if(__SESSION_ENGINE=="DATABASE"){
     $sessionManager = new FileSessionManager();
 }
 
+$eventManager = new DispatchManager();
+
 
 //create register manager
 $registerManager = new RegisterManager();
+
+$registerManager->events = $eventManager;
 
 $requestManager = new RequestManager($registerManager);
 
