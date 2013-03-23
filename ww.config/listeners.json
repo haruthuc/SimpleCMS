@@ -2,7 +2,7 @@
     "data": {
         "AccountModel":{
             "events":{
-                "before-add":["AccountEvent::beforeAdd"]
+                "before-add":["AccountEvents::beforeAdd"]
             }
         }
         

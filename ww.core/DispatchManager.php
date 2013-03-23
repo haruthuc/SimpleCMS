@@ -46,7 +46,7 @@ class DispatchManager{
          $listeners = $listenerData["events"];
          
          
-          var_dump($listeners);
+          //var_dump($listeners);
          $eventObject = new Event($entity, $entityName."-".$eventName);
          
          if(array_key_exists($eventName,$listeners))

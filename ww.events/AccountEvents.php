@@ -7,9 +7,12 @@
 class AccountEvents{
     
     
-    public function beforeAdd($entity){
+    public function beforeAdd(EventI $event){
         
+        $entity = $event->getSubject();
         
+        echo "<pre>";
+        print_r($entity->getUsername());
         
         
         

@@ -39,15 +39,23 @@ class Event implements EventI{
     }
 
 
-
+    public function getValue(){
+        
+        return $this->value;
+    }
 
 
 
     public function addListener($listener) {
         
         //echo "Listenter has been registed at Event ".$this->eventName; die();
+        $buffArray = explode("::",$listener);
+        $className = $buffArray[0];
+        $functionName = $buffArray[1];
+        $listenerBuff = array(new $className,$functionName);
+    
         
-        $this->listeners[] = $listener; 
+        $this->listeners[] = $listenerBuff; 
         
     }
 
@@ -61,6 +69,8 @@ class Event implements EventI{
 
     public function getSubject() {
         
+        return $this->subject;
+        
     }
 
     public function hasListeners() {
@@ -69,10 +79,22 @@ class Event implements EventI{
 
     public function notify() {
         
-        print_r($this->subject);
         
-        "echo Notify event";
+        foreach ($this->listeners as $valueListener) {
+            
+            call_user_func_array($valueListener,array($this));
+            
+            
+        }
         
+        
+      
+        
+    }
+    
+    private function setValue($value){
+        
+        $this->value = $value;
     }
 }
 
