@@ -68,6 +68,14 @@ class AccountController extends BaseController{
     
     public function deleteAction(){
         
+            $params = $this->register->request->getQuery();
+            
+            $id = $this->register->request->get("id");
+        
+            $accountModel = new AccountModel();
+            $accountModel->setId($id);
+            $accountModel->delete();
+            RouterManager::redirect("account", "manage");
     }
     
     

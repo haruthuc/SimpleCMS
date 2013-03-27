@@ -127,7 +127,7 @@
                                             $str .="<td>".$result['role']."</td>";
                                             $str .=' <td>
                                             <a href="#" class="btn btn-mi btn-info"  rel="tooltip" title="Chỉnh sửa"><i class="icon-edit"></i></a>
-                                            <a href="../account/test/'.$result['id'].'" class="btn btn-mi btn-danger" rel="tooltip" title="Xóa"><i class="icon-remove"></i></a>
+                                            <a href="../account/delete/id/'.$result['id'].'" class="btn btn-mi btn-danger" rel="tooltip" title="Xóa"><i class="icon-remove"></i></a>
                                             </td>';
                                             $str .="</tr>";
                                             echo $str;

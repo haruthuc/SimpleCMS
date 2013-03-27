@@ -112,6 +112,18 @@ class RequestManager{
         
     }
     
+    public static  function get($key){
+        
+        if(key_exists($key,self::$_params)){
+            return self::$_params[$key];
+        }else{
+            
+            return null;
+        }
+        
+    }
+
+
     public static function getController(){
         
         return self::$_controller;

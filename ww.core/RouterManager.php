@@ -61,23 +61,24 @@ class RouterManager {
                   
                   
                   if(!class_exists($controller)){   
-                            include_once $fileController;
+                     
+                      include_once $fileController;
                   }
                   
                   
                    $classController = new $controller($this->register);
                    
+                
                    
-                   
-                   if(is_callable(array($classController,$action))==FALSE){
-                       
+                   if(!method_exists($classController,$action)){
+                      
                             $action = "indexAction";
                    }
                         
                    //print_r($classController);
-                   $classController = new AccountController($this->register);
+                  // $classController = new AccountController($this->register);
                     
-                   $classController->testAction();
+                   $classController->$action();
                   
           }
           
