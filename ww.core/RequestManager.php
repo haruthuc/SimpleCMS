@@ -96,10 +96,6 @@ class RequestManager{
                   $arrayParam = array();
                  
                   for($i=0;$i<$countParam;$i++){
-                      //$z = ($i*$i);
-                      //echo $i."<br/>";
-                     
-                     // echo $o ."<br/>";;
                       $z = $i*2;
                       
                       $arrayParam[self::$_params[$z]] = self::$_params[$z+1];

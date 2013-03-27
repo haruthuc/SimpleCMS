@@ -18,6 +18,7 @@ class AccountModel extends BaseModel{
     
     public function getRole() {
         return $this->role;
+        
     }
 
     public function setRole($role) {

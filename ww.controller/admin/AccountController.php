@@ -38,10 +38,12 @@ class AccountController extends BaseController{
         
         if(isset($_POST["username"])){
             
+            
             $username =  $_POST['username'];
             $password = $_POST['password'];
             $email = $_POST['email'];
             $accountModel = new AccountModel();
+            $accountModel->getName();
             $accountModel->setPassword($password);
             $accountModel->setUsername($username);
             $accountModel->setEmail($email);
@@ -62,6 +64,12 @@ class AccountController extends BaseController{
         
         
     }
+    
+    
+    public function deleteAction(){
+        
+    }
+    
     
 }
 

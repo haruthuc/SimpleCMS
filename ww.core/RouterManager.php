@@ -50,7 +50,6 @@ class RouterManager {
                 }
                 $fileController = __SITE_PATH.$pathController.ucfirst($controller)."Controller.php";
                 if(is_readable($fileController)==false){
-                   
                        $controller = "index";
                        $action = "index";
                        $fileController = __SITE_PATH.$pathController.ucfirst($controller)."Controller.php";   
@@ -64,17 +63,22 @@ class RouterManager {
                   if(!class_exists($controller)){   
                             include_once $fileController;
                   }
+                  
+                  
                    $classController = new $controller($this->register);
                    
                    
                    
                    if(is_callable(array($classController,$action))==FALSE){
+                       
                             $action = "indexAction";
-                        }
+                   }
                         
-                        
-                            $classController -> $action();
-                   
+                   //print_r($classController);
+                   $classController = new AccountController($this->register);
+                    
+                   $classController->testAction();
+                  
           }
           
           
