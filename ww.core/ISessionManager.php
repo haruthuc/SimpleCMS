@@ -9,7 +9,7 @@ abstract class ISessionManager{
     protected $sessionName;
     protected $life_time;
     public function __construct() {
-        
+       
         if(__SESSION_TIMEOUT!=0){
             $this->life_time = __SESSION_TIMEOUT;
         }else{
@@ -23,6 +23,7 @@ abstract class ISessionManager{
             array($this, "destroy"),
             array($this, "gc")
         );
+        echo $this->life_time;die();
     }
     
     abstract function open($savePath, $sessionName) ;
@@ -33,13 +34,6 @@ abstract class ISessionManager{
     abstract function gc($maxlifetime);
     
     
-    function __destruct ()
-    // ensure session data is written out before classes are destroyed
-    // (see https://bugs.php.net/bug.php?id=33772 for details)
-    {
-        @session_write_close();
-
-    } // __destruct
 }
 
 ?>

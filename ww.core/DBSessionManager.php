@@ -12,7 +12,7 @@ class DBSessionManager extends ISessionManager {
     }
 
     public function destroy($id) {
-        
+         echo "Test";DIE();
         $newid = mysql_real_escape_string($id);
         $modelSession = new SessionModel();
         $modelSession->setSession_id($newid);
@@ -30,14 +30,14 @@ class DBSessionManager extends ISessionManager {
 
     public function open($savePath, $sessionName) {
         
-        //global $sess_save_path;
-        //$sess_save_path = $savePath;
+        global $sess_save_path;
+        $sess_save_path = $savePath;
         return true;
         
     }
 
     public function read($id) {
-        
+       
         $newid = mysql_real_escape_string($id);
         //var_dump($id);
         $time = time();

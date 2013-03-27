@@ -20,14 +20,14 @@ class AccountController extends BaseController{
     
     public function manageAction(){
         
-        
+             //var_dump($_SESSION); die();
             $accountModel = new AccountModel();
             $results =  $accountModel->find();
             
             $this->register->template->results = $results;
          
             $this->register->template->render("account");
-        
+           
         
         
     }
