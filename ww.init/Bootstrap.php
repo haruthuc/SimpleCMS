@@ -30,7 +30,7 @@ function __autoload($class_name) {
 
     if (strstr($class_name, "Controller") != FALSE) {
             //$file = __SITE_PATH . '/ww.controller/' . $class_name;
-        if($class_name="BaseController") $file = __SITE_PATH . '/ww.controller/' . $class_name;
+        if($class_name=="BaseController") $file = __SITE_PATH . '/ww.controller/' . $class_name;
     }
 
     if (strstr($class_name, "Model") != FALSE) {
@@ -60,7 +60,10 @@ function __autoload($class_name) {
 
 //check config session engine
 if(__SESSION_ENGINE=="DATABASE"){
+    
     $sessionManager = new DBSessionManager ();
+    //echo "Create Session Manager";
+    
 } elseif(__SESSION_ENGINE=="FILE") {
     $sessionManager = new FileSessionManager();
 }

@@ -6,13 +6,32 @@
  */
 
 class DBSessionManager extends ISessionManager {
+    
+    
+     public function __construct() {
+       
+        if(__SESSION_TIMEOUT!=0){
+            $this->life_time = __SESSION_TIMEOUT;
+        }else{
+            $this->life_time = get_cfg_var("session.gc_maxlifetime");
+        }
+        session_set_save_handler(
+            array($this, "open"),
+            array($this, "close"),
+            array($this, "read"),
+            array($this, "write"),
+            array($this, "destroy"),
+            array($this, "gc")
+        );
+        
+    }
 
     public function close() {
         return true;
     }
 
     public function destroy($id) {
-         echo "Test";DIE();
+        
         $newid = mysql_real_escape_string($id);
         $modelSession = new SessionModel();
         $modelSession->setSession_id($newid);
@@ -69,6 +88,8 @@ class DBSessionManager extends ISessionManager {
          $sessionModel->setSession_data($newdata);
          $sessionModel->setExpires($time);
          $sessionModel->save();
+         
+         echo "Save Session";die();
          
     }
 
