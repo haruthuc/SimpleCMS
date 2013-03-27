@@ -85,7 +85,7 @@ class RequestManager{
               $arrKey = array();
               $arrValue = array();
               $countParam = count(self::$_params);
-              if($countParam>2)
+              if($countParam>1)
               {
                   
                    
@@ -103,7 +103,10 @@ class RequestManager{
                    }
                    
                    self::$_params = $arrayParam;
+                   
               }
+              
+              //var_dump(self::$_params);
     }
     //get request GET METHOD
     public static function getQuery(){
@@ -115,7 +118,9 @@ class RequestManager{
     public static  function get($key){
         
         if(key_exists($key,self::$_params)){
+            
             return self::$_params[$key];
+            
         }else{
             
             return null;

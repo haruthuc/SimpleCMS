@@ -2,12 +2,7 @@
 //start session
 //echo "<pre>";
 //print_r ($_SERVER);
-$sid = session_id();
-if($sid) {
-    echo "Session exists!";
-} else {
-    session_start();
-}
+ session_start();
 /** error report * */
 error_reporting(E_ALL);
 define('__SITE_PATH', realpath(dirname(__FILE__)));
