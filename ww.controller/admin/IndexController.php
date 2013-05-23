@@ -43,8 +43,7 @@ class IndexController extends BaseController{
             
              
         }else{
-            
-            //LinkHelper::redirect('index',"login");
+       
              RouterManager::redirect("index", "login");
             
         }
